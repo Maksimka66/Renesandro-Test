@@ -14,7 +14,7 @@ const handleRejected = (state, action) => {
 const renesandroSlice = createSlice({
   name: "renesandro",
   initialState: {
-    table: {},
+    table: [],
     cards: {},
     loading: false,
     error: null,

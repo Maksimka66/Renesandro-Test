@@ -5,9 +5,9 @@ axios.defaults.baseURL = "https://fasteasy-jvqis72guq-lm.a.run.app/tz-front";
 
 export const generateImages = createAsyncThunk(
   "tasks/generate",
-  async (_, thunkAPI) => {
+  async (values, thunkAPI) => {
     try {
-      const res = await axios.post("/generate_images");
+      const res = await axios.post("/generate_images", values);
 
       console.log(res);
 
