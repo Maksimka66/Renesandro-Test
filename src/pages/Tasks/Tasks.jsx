@@ -10,13 +10,13 @@ const Tasks = () => {
   const table = useSelector(selectTable);
 
   const initialValues = {
-    taskName: "",
+    task_name: "hi-hi",
     dimension: "1x1",
-    templateID: "mwpswxcudtwxb",
-    images: "",
-    text: "",
-    amount: "",
-    genType: "Cyclic",
+    template_id: "mwpswxcudtwxb",
+    image_layers: ["img1", "img2"],
+    text_layers: ["Hello", "World"],
+    amount: 0,
+    gen_type: "Cyclic",
   };
 
   const taskNameId = useId();
@@ -44,8 +44,8 @@ const Tasks = () => {
         <Form>
           <div>
             <label htmlFor={taskNameId}>Task name</label>
-            <Field type="text" name="taskName" id={taskNameId} />
-            <ErrorMessage name="taskName" as="span" />
+            <Field type="text" name="task_name" id={taskNameId} />
+            <ErrorMessage name="task_name" as="span" />
           </div>
 
           <div>
@@ -60,23 +60,23 @@ const Tasks = () => {
 
           <div>
             <label htmlFor={templateIDId}>Template ID</label>
-            <Field as="select" name="templateID" id={templateIDId}>
+            <Field as="select" name="template_id" id={templateIDId}>
               <option value="mwpswxcudtwxb">First ID</option>
               <option value="0xdoscyowl50c">Second ID</option>
             </Field>
-            <ErrorMessage name="templateID" as="span" />
+            <ErrorMessage name="template_id" as="span" />
           </div>
 
           <div>
             <label htmlFor={imagesId}>Images</label>
-            <Field name="images" id={imagesId} />
-            <ErrorMessage name="images" as="span" />
+            <Field name="image_layers" id={imagesId} />
+            <ErrorMessage name="image_layers" as="span" />
           </div>
 
           <div>
             <label htmlFor={textId}>Text</label>
-            <Field name="text" id={textId} />
-            <ErrorMessage name="text" as="span" />
+            <Field name="text_layers" id={textId} />
+            <ErrorMessage name="text_layers" as="span" />
           </div>
 
           <div>
@@ -87,11 +87,11 @@ const Tasks = () => {
 
           <div>
             <label htmlFor={genTypeId}>Gen type</label>
-            <Field as="select" name="genType" id={genTypeId}>
+            <Field as="select" name="gen_type" id={genTypeId}>
               <option value="cyclic_generation">Cyclic</option>
               <option value="random_generation">Random</option>
             </Field>
-            <ErrorMessage name="genType" as="span" />
+            <ErrorMessage name="gen_type" as="span" />
           </div>
 
           <button type="submit">Generate</button>

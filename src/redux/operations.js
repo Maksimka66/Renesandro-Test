@@ -3,12 +3,15 @@ import axios from "axios";
 
 axios.defaults.baseURL = "https://fasteasy-jvqis72guq-lm.a.run.app/tz-front";
 
+axios.defaults.headers.common["Authorization"] =
+  "Basic cmVuZXNhbmRybzpxd2VydHkxMjM0";
+
 export const generateImages = createAsyncThunk(
   "tasks/generate",
   async (values, thunkAPI) => {
     try {
+      console.log(values);
       const res = await axios.post("/generate_images", values);
-
       console.log(res);
 
       return res.data;

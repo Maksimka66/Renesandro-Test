@@ -26,7 +26,7 @@ const renesandroSlice = createSlice({
       .addCase(generateImages.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.table = action.payload;
+        state.table.push(action.payload);
       })
       .addCase(generateImages.rejected, handleRejected)
       .addCase(generateFormats.pending, handlePending)

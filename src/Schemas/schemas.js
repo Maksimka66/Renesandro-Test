@@ -1,20 +1,20 @@
 import * as Yup from "yup";
 
 export const createTaskSchema = Yup.object().shape({
-  taskName: Yup.string()
+  task_name: Yup.string()
     .trim()
     .min(2, "Too short!")
     .required("Please insert name of your task!"),
   dimension: Yup.string()
     .trim()
     .required("Please choose dimension of your images!"),
-  templateID: Yup.string()
+  template_id: Yup.string()
     .trim()
     .required("Please choose id of your template!"),
-  images: Yup.string(),
-  text: Yup.string(),
+  image_layers: Yup.array().required(),
+  text_layers: Yup.array().required(),
   amount: Yup.number().required("Please insert amount of your creo!"),
-  genType: Yup.string().trim().required(),
+  gen_type: Yup.string().trim().required(),
 });
 
 export const createCreatives = Yup.object().shape({
