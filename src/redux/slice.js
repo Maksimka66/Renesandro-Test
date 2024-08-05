@@ -14,8 +14,11 @@ const handleRejected = (state, action) => {
 const renesandroSlice = createSlice({
   name: "renesandro",
   initialState: {
-    table: [],
+    tasks: [],
+    images: [],
     cards: {},
+    addTaskValues: {},
+    modal: false,
     loading: false,
     error: null,
   },
@@ -26,7 +29,7 @@ const renesandroSlice = createSlice({
       .addCase(generateImages.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.table.push(action.payload);
+        state.images.push(action.payload);
       })
       .addCase(generateImages.rejected, handleRejected)
       .addCase(generateFormats.pending, handlePending)
@@ -36,6 +39,14 @@ const renesandroSlice = createSlice({
         state.cards = action.payload;
       })
       .addCase(generateFormats.rejected, handleRejected),
+
+  reducers: {
+    switchModal(state, action) {
+      state.modal = action.payload;
+    },
+  },
 });
+
+export const { switchModal } = renesandroSlice.actions;
 
 export default renesandroSlice.reducer;

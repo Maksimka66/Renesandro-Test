@@ -1,13 +1,17 @@
 import { useId } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { createTaskSchema } from "../../Schemas/schemas";
+import { generateImagesSchema } from "../../Schemas/schemas";
 import { generateImages } from "../../redux/operations";
 import { selectTable } from "../../redux/selectors";
+import TaskColumn from "../../components/TaskColumn/TaskColumn";
+import { Outlet } from "react-router-dom";
 
 const Tasks = () => {
   const dispatch = useDispatch();
   const table = useSelector(selectTable);
+
+  console.log(table);
 
   const initialValues = {
     task_name: "hi-hi",
@@ -33,13 +37,24 @@ const Tasks = () => {
     actions.resetForm();
   };
 
+  const createTask = () => {};
+
   return (
     <div>
-      <ul>{table}</ul>
+      {table.length !== 0 && (
+        <ul>
+          {table.map((item, index) => (
+            <li key={index}>{<TaskColumn />}</li>
+          ))}
+        </ul>
+      )}
+      <button type="button" onClick={createTask}>
+        Add task
+      </button>
       <Formik
         initialValues={initialValues}
         onSubmit={handleSubmit}
-        validationSchema={createTaskSchema}
+        validationSchema={generateImagesSchema}
       >
         <Form>
           <div>
@@ -93,10 +108,9 @@ const Tasks = () => {
             </Field>
             <ErrorMessage name="gen_type" as="span" />
           </div>
-
-          <button type="submit">Generate</button>
         </Form>
       </Formik>
+      <Outlet />
     </div>
   );
 };
