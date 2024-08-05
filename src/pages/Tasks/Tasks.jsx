@@ -13,10 +13,10 @@ const Tasks = () => {
     task_name: "hi-hi",
     dimension: "1x1",
     template_id: "mwpswxcudtwxb",
-    image_layers: ["img1", "img2"],
-    text_layers: ["Hello", "World"],
-    amount: 0,
-    gen_type: "Cyclic",
+    image_layers: ["image1", "image2"],
+    text_layers: [""],
+    amount: 40,
+    gen_type: "cyclic_generation",
   };
 
   const taskNameId = useId();
