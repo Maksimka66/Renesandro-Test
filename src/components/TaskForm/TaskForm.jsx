@@ -37,23 +37,44 @@ const TaskForm = () => {
   }
 
   return (
-    <div>
-      <ModalWindow>
+    <ModalWindow>
+      <div className={css.formContainer}>
+        <div className={css.btnContainer}>
+          <button
+            className={css.closeModalBtn}
+            type="button"
+            onClick={closeModal}
+          >
+            <svg className={css.closeIcon} width="32" height="32">
+              <use href="/src/IconsSprite/sprite.svg#icon-Rating-1"></use>
+            </svg>
+          </button>
+        </div>
         <Formik
           onSubmit={handleSubmit}
           initialValues={initialValues}
           validationSchema={createTaskSchema}
         >
-          <Form>
-            <div>
+          <Form className={css.taskForm}>
+            <div className={css.taskFormItem}>
               <label htmlFor={taskNameId}>Task name</label>
-              <Field type="text" name="task_name" id={taskNameId} />
+              <Field
+                className={css.field}
+                type="text"
+                name="task_name"
+                id={taskNameId}
+              />
               <ErrorMessage name="task_name" as="span" />
             </div>
 
-            <div>
+            <div className={css.taskFormItem}>
               <label htmlFor={dimensionId}>Dimension</label>
-              <Field as="select" name="dimension" id={dimensionId}>
+              <Field
+                className={css.field}
+                as="select"
+                name="dimension"
+                id={dimensionId}
+              >
                 <option value="1x1">1x1</option>
                 <option value="9x16">9x16</option>
                 <option value="16x9">16x9</option>
@@ -61,27 +82,32 @@ const TaskForm = () => {
               <ErrorMessage name="dimension" as="span" />
             </div>
 
-            <div>
+            <div className={css.taskFormItem}>
               <label htmlFor={imagesId}>Images</label>
-              <Field name="image_layers" id={imagesId} />
+              <Field className={css.field} name="image_layers" id={imagesId} />
               <ErrorMessage name="image_layers" as="span" />
             </div>
 
-            <div>
+            <div className={css.taskFormItem}>
               <label htmlFor={textId}>Text</label>
-              <Field name="text_layers" id={textId} />
+              <Field className={css.field} name="text_layers" id={textId} />
               <ErrorMessage name="text_layers" as="span" />
             </div>
 
-            <div>
+            <div className={css.taskFormItem}>
               <label htmlFor={amountId}>Amount</label>
-              <Field name="amount" id={amountId} />
+              <Field className={css.field} name="amount" id={amountId} />
               <ErrorMessage name="amount" as="span" />
             </div>
 
-            <div>
+            <div className={css.taskFormItem}>
               <label htmlFor={genTypeId}>Gen type</label>
-              <Field as="select" name="gen_type" id={genTypeId}>
+              <Field
+                className={css.field}
+                as="select"
+                name="gen_type"
+                id={genTypeId}
+              >
                 <option value="cyclic_generation">Cyclic</option>
                 <option value="random_generation">Random</option>
               </Field>
@@ -91,11 +117,8 @@ const TaskForm = () => {
             <button type="submit">Create new task</button>
           </Form>
         </Formik>
-        <button type="button" onClick={closeModal}>
-          Close modal
-        </button>
-      </ModalWindow>
-    </div>
+      </div>
+    </ModalWindow>
   );
 };
 

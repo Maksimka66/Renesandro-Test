@@ -50,54 +50,69 @@ const TaskColumn = ({
   }
 
   return (
-    <div>
-      <div>
-        <div>
-          <h2>Task name</h2>
-          <NavLink to={template_id}>{task_name}</NavLink>
+    <div className={css.taskColumn}>
+      <div className={css.itemContainer}>
+        <div className={css.item}>
+          <h2 className={css.itemHeader}>Task name</h2>
+          <NavLink to={template_id} className={css.headerText}>
+            {task_name}
+          </NavLink>
         </div>
-        <div>
-          <h2>Dimension</h2>
-          <p>{dimension}</p>
+        <div className={css.item}>
+          <h2 className={css.itemHeader}>Dimension</h2>
+          <p className={css.itemDimension}>{dimension}</p>
         </div>
-        <div>
-          <h2>Template ID</h2>
-          <p>{template_id}</p>
+        <div className={css.item}>
+          <h2 className={css.itemHeader}>Template ID</h2>
+          <p className={css.itemTemplate}>{template_id}</p>
         </div>
-        <div>
-          <h2>Images</h2>
-          <p>{image_layers}</p>
+        <div className={css.item}>
+          <h2 className={css.itemHeader}>Images</h2>
+          <p className={css.itemContent}>{image_layers}</p>
         </div>
-        <div>
-          <h2>Text</h2>
-          <p>{text_layers}</p>
+        <div className={css.item}>
+          <h2 className={css.itemHeader}>Text</h2>
+          <p className={css.itemContent}>{text_layers}</p>
         </div>
-        <div>
-          <h2>Amount</h2>
-          <p>{amount}</p>
+        <div className={css.item}>
+          <h2 className={css.itemHeader}>Amount</h2>
+          <p className={css.itemContent}>{amount}</p>
         </div>
-        <div>
-          <h2>Gen type</h2>
-          <p>{gen_type}</p>
+        <div className={css.item}>
+          <h2 className={css.itemHeader}>Gen type</h2>
+          <p className={css.itemGenType}>{gen_type}</p>
         </div>
-        <div>
-          <h2>Gen tasks</h2>
-          <button type="button" onClick={openModal}>
+        <div className={css.item}>
+          <h2 className={css.itemHeader}>Gen tasks</h2>
+          <button
+            className={css.generateImgBtn}
+            type="button"
+            onClick={openModal}
+          >
             Generate
           </button>
         </div>
-        <div>
-          <h2>Result ads</h2>
+        <div className={css.item}>
+          <h2 className={css.itemHeader}>Result ads</h2>
           <a
             href={`https://testapi-jvqis72guq-lm.a.run.app/test_vidro/${task_name}_${dimension}/format_validation`}
+            className={css.resultLink}
           >
             Folder
           </a>
         </div>
+        <div className={css.item}>
+          <h2>Remove task</h2>
+          <button
+            className={css.deleteTaskBtn}
+            type="button"
+            onClick={deleteTask}
+          >
+            Delete
+          </button>
+        </div>
       </div>
-      <button type="button" onClick={deleteTask}>
-        Delete task
-      </button>
+
       {setModal && (
         <ModalWindow>
           <ImagesForm

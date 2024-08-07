@@ -1,0 +1,84 @@
+.taskColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.itemContainer {
+  display: flex;
+}
+
+.item {
+  border: 1px solid #000000;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.itemHeader {
+  font-family: "Inter", sans-serif;
+  color: rgb(16, 24, 40);
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 30px;
+  text-align: center;
+}
+
+.headerText {
+  color: rgb(56, 146, 20);
+  font-family: "Inter", sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24px;
+  text-align: center;
+}
+
+.itemContent {
+  color: rgb(16, 24, 40);
+  font-family: "Inter", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: center;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.itemDimension {
+  composes: itemContent;
+  background-color: #deb7e9;
+  width: 48px;
+}
+
+.itemTemplate {
+  composes: itemContent;
+  background-color: #d6486b;
+  width: 48px;
+}
+
+.itemGenType {
+  composes: itemContent;
+  background-color: #ebba72;
+}
+
+.generateImgBtn {
+  background-color: #e4e26f;
+  color: #000000;
+  padding: 12px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.resultLink {
+  composes: itemContent;
+  background-color: #b3f588;
+}
+
+.deleteTaskBtn {
+  composes: generateImgBtn;
+  background-color: #e71538;
+}

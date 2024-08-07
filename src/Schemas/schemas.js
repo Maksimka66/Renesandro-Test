@@ -8,8 +8,8 @@ export const createTaskSchema = Yup.object().shape({
   template_id: Yup.string().required("Please choose id!"),
   amount: Yup.number().required(),
   gen_type: Yup.string().trim().required(),
-  image_layers: Yup.array().of(Yup.string()),
-  text_layers: Yup.array().of(Yup.string()),
+  image_layers: Yup.string().required(),
+  text_layers: Yup.string().required(),
 });
 
 export const generateImagesSchema = Yup.object().shape({
@@ -25,15 +25,3 @@ export const generateImagesSchema = Yup.object().shape({
   gen_per_ref: Yup.number().required("Please insert amount of your creo!"),
   flow: Yup.string().trim().required(),
 });
-
-// export const createCreatives = Yup.object().shape({
-//   task_name: Yup.string().trim().required(),
-//   dimension: Yup.string()
-//     .trim()
-//     .required("Please choose dimension of your images!"),
-//   template_id: Yup.string().required("Please choose id!"),
-//   amount: Yup.number().required(),
-//   gen_type: Yup.string().trim().required(),
-//   image_layers: Yup.array().of(Yup.string()).required(),
-//   text_layers: Yup.array().of(Yup.string()).required(),
-// });

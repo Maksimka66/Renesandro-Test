@@ -18,7 +18,7 @@ const Tasks = () => {
   }
 
   return (
-    <div>
+    <div className={css.listContainer}>
       {table.length !== 0 ? (
         <ul className={css.tasksList}>
           {table.map((item) => (
@@ -32,7 +32,7 @@ const Tasks = () => {
           Welcome! We`ll help you with your tasks. Let`s get started!
         </h1>
       )}
-      <button type="button" onClick={createTask}>
+      <button className={css.addTaskBtn} type="button" onClick={createTask}>
         Add task
       </button>
       {formAddTask && <TaskForm />}

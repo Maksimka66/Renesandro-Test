@@ -1,0 +1,55 @@
+.formContainer {
+  display: flex;
+  gap: 32px;
+  flex-direction: column;
+}
+
+.taskForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 24px;
+  border: 1px solid rgba(16, 24, 40, 0.2);
+  border-radius: 10px;
+}
+
+.btnContainer {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.closeModalBtn {
+  background-color: #d61434;
+  padding: 0;
+  border-radius: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.closeIcon {
+  stroke: white;
+}
+
+.taskFormItem {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: start;
+  width: 100%;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 18px;
+  background: #f7f7f7;
+  border-radius: 10px;
+  width: 100%;
+}
