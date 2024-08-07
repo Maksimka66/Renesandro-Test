@@ -3,33 +3,44 @@ import { useDispatch } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { createTaskSchema } from "../../Schemas/schemas";
 import ModalWindow from "../ModalWindow/ModalWindow";
+import { addTaskValues, switchModal } from "../../redux/slice";
 import css from "./TaskForm.module.css";
 
 const TaskForm = () => {
   const dispatch = useDispatch();
 
   const initialValues = {
+    template_id: useId(),
     task_name: "",
     dimension: "1x1",
-    template_id: "mwpswxcudtwxb",
-    image_layers: ["image1", "image2"],
-    text_layers: [""],
-    amount: 40,
+    image_layers: "",
+    text_layers: "",
+    amount: "",
     gen_type: "cyclic_generation",
   };
 
   const taskNameId = useId();
   const dimensionId = useId();
-  const templateIDId = useId();
   const imagesId = useId();
   const textId = useId();
   const amountId = useId();
   const genTypeId = useId();
 
+  function handleSubmit(values, actions) {
+    dispatch(addTaskValues(values));
+    closeModal();
+    actions.resetForm();
+  }
+
+  function closeModal() {
+    dispatch(switchModal(false));
+  }
+
   return (
     <div>
       <ModalWindow>
         <Formik
+          onSubmit={handleSubmit}
           initialValues={initialValues}
           validationSchema={createTaskSchema}
         >
@@ -48,15 +59,6 @@ const TaskForm = () => {
                 <option value="16x9">16x9</option>
               </Field>
               <ErrorMessage name="dimension" as="span" />
-            </div>
-
-            <div>
-              <label htmlFor={templateIDId}>Template ID</label>
-              <Field as="select" name="template_id" id={templateIDId}>
-                <option value="mwpswxcudtwxb">First ID</option>
-                <option value="0xdoscyowl50c">Second ID</option>
-              </Field>
-              <ErrorMessage name="template_id" as="span" />
             </div>
 
             <div>
@@ -85,9 +87,13 @@ const TaskForm = () => {
               </Field>
               <ErrorMessage name="gen_type" as="span" />
             </div>
+
+            <button type="submit">Create new task</button>
           </Form>
         </Formik>
-        <button type="submit">Generate</button>
+        <button type="button" onClick={closeModal}>
+          Close modal
+        </button>
       </ModalWindow>
     </div>
   );

@@ -44,9 +44,18 @@ const renesandroSlice = createSlice({
     switchModal(state, action) {
       state.modal = action.payload;
     },
+    addTaskValues(state, action) {
+      state.tasks.push(action.payload);
+    },
+    removeTask(state, action) {
+      state.tasks = state.tasks.filter(
+        (task) => task.template_id !== action.payload
+      );
+    },
   },
 });
 
-export const { switchModal } = renesandroSlice.actions;
+export const { switchModal, addTaskValues, removeTask } =
+  renesandroSlice.actions;
 
 export default renesandroSlice.reducer;

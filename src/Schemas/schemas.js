@@ -8,8 +8,8 @@ export const createTaskSchema = Yup.object().shape({
   template_id: Yup.string().required("Please choose id!"),
   amount: Yup.number().required(),
   gen_type: Yup.string().trim().required(),
-  image_layers: Yup.array().of(Yup.string()).required(),
-  text_layers: Yup.array().of(Yup.string()).required(),
+  image_layers: Yup.array().of(Yup.string()),
+  text_layers: Yup.array().of(Yup.string()),
 });
 
 export const generateImagesSchema = Yup.object().shape({

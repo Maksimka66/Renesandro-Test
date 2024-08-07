@@ -1,0 +1,19 @@
+.welcomeHeader {
+  font-family: "Inter", sans-serif;
+  color: rgb(16, 24, 40);
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 30px;
+  text-align: left;
+}
+
+.tasksList {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.listItem {
+  border: 1px solid #000000;
+  width: 400px;
+  height: 358px;
+}
