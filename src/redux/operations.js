@@ -10,9 +10,7 @@ export const generateImages = createAsyncThunk(
   "tasks/generate",
   async (values, thunkAPI) => {
     try {
-      console.log(values);
       const res = await axios.post("/generate_images", values);
-      console.log(res);
 
       return res.data;
     } catch (error) {

@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import ModalWindow from "../ModalWindow/ModalWindow";
 import {
   selectGenerateImagesForm,
   selectModalWindow,
@@ -42,16 +41,13 @@ const TaskColumn = ({
   function openModal() {
     dispatch(switchModal(true));
     dispatch(openGenerateImagesForm(true));
+    dispatch(getTask(template_id));
   }
 
   function getTaskId() {
     dispatch(switchModal(true));
     dispatch(getTask(template_id));
     dispatch(openSendTaskForm(true));
-  }
-
-  function closeModal() {
-    dispatch(switchModal(false));
   }
 
   function deleteTask() {
@@ -127,22 +123,7 @@ const TaskColumn = ({
       </div>
 
       {setModal && stateGenerateImagesForm && (
-        <ModalWindow>
-          <div className={css.imagesFormContainer}>
-            <div className={css.btnContainer}>
-              <button
-                className={css.closeModalBtn}
-                type="button"
-                onClick={closeModal}
-              >
-                <svg className={css.closeIcon} width="32" height="32">
-                  <use href="/src/IconsSprite/sprite.svg#icon-Rating-1"></use>
-                </svg>
-              </button>
-            </div>
-            <ImagesForm values={initialValues} />
-          </div>
-        </ModalWindow>
+        <ImagesForm values={initialValues} />
       )}
     </div>
   );

@@ -12,20 +12,10 @@ import { createTaskSchema } from "../../Schemas/schemas";
 import { generateFormats } from "../../redux/operations";
 import css from "./Cards.module.css";
 
-const imageArr = [];
-const textArr = [];
-
 const Cards = () => {
   const dispatch = useDispatch();
-  const {
-    task_name,
-    amount,
-    dimension,
-    gen_type,
-    image_layers,
-    template_id,
-    text_layers,
-  } = useSelector(selectCard);
+  const { template_id, task_name, amount, dimension, gen_type } =
+    useSelector(selectCard);
   const modalWindowCard = useSelector(selectModalWindow);
   const sendForm = useSelector(selectSendTaskForm);
 
@@ -35,8 +25,6 @@ const Cards = () => {
   const textId = useId();
   const amountId = useId();
   const genTypeId = useId();
-
-  console.log(image_layers);
 
   const initialValues = {
     template_id,
