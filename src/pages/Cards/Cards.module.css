@@ -1,0 +1,19 @@
+.btnContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.closeModalBtn {
+  background-color: #d61434;
+  padding: 0;
+  border-radius: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.closeIcon {
+  stroke: white;
+}

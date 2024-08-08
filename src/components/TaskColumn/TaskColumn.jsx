@@ -3,8 +3,17 @@ import { NavLink } from "react-router-dom";
 import { generateImages } from "../../redux/operations";
 import { generateImagesSchema } from "../../Schemas/schemas";
 import ModalWindow from "../ModalWindow/ModalWindow";
-import { selectModalWindow } from "../../redux/selectors";
-import { removeTask, switchModal } from "../../redux/slice";
+import {
+  selectGenerateImagesForm,
+  selectModalWindow,
+} from "../../redux/selectors";
+import {
+  getTask,
+  openGenerateImagesForm,
+  openSendTaskForm,
+  removeTask,
+  switchModal,
+} from "../../redux/slice";
 import ImagesForm from "../ImagesForm/ImagesForm";
 import css from "./TaskColumn.module.css";
 
@@ -21,6 +30,7 @@ const TaskColumn = ({
 }) => {
   const dispatch = useDispatch();
   const setModal = useSelector(selectModalWindow);
+  const stateGenerateImagesForm = useSelector(selectGenerateImagesForm);
 
   const initialValues = {
     images: image_layers,
@@ -33,6 +43,13 @@ const TaskColumn = ({
 
   function openModal() {
     dispatch(switchModal(true));
+    dispatch(openGenerateImagesForm(true));
+  }
+
+  function getTaskId() {
+    dispatch(switchModal(true));
+    dispatch(getTask(template_id));
+    dispatch(openSendTaskForm(true));
   }
 
   function closeModal() {
@@ -54,7 +71,11 @@ const TaskColumn = ({
       <div className={css.itemContainer}>
         <div className={css.item}>
           <h2 className={css.itemHeader}>Task name</h2>
-          <NavLink to={template_id} className={css.headerText}>
+          <NavLink
+            to={template_id}
+            className={css.headerText}
+            onClick={getTaskId}
+          >
             {task_name}
           </NavLink>
         </div>
@@ -113,16 +134,26 @@ const TaskColumn = ({
         </div>
       </div>
 
-      {setModal && (
+      {setModal && stateGenerateImagesForm && (
         <ModalWindow>
-          <ImagesForm
-            submitForm={submitForm}
-            values={initialValues}
-            schema={generateImagesSchema}
-          />
-          <button type="button" onClick={closeModal}>
-            Close modal
-          </button>
+          <div className={css.imagesFormContainer}>
+            <div className={css.btnContainer}>
+              <button
+                className={css.closeModalBtn}
+                type="button"
+                onClick={closeModal}
+              >
+                <svg className={css.closeIcon} width="32" height="32">
+                  <use href="/src/IconsSprite/sprite.svg#icon-Rating-1"></use>
+                </svg>
+              </button>
+            </div>
+            <ImagesForm
+              submitForm={submitForm}
+              values={initialValues}
+              schema={generateImagesSchema}
+            />
+          </div>
         </ModalWindow>
       )}
     </div>

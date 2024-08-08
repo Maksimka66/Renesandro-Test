@@ -1,20 +1,24 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
-import { selectModalWindow, selectTable } from "../../redux/selectors";
+import {
+  selectAddTaskForm,
+  selectModalWindow,
+  selectTable,
+} from "../../redux/selectors";
 import TaskColumn from "../../components/TaskColumn/TaskColumn";
 import TaskForm from "../../components/TaskForm/TaskForm";
-import { switchModal } from "../../redux/slice";
+import { openAddTaskForm, switchModal } from "../../redux/slice";
 import css from "./Tasks.module.css";
 
 const Tasks = () => {
   const dispatch = useDispatch();
   const table = useSelector(selectTable);
   const formAddTask = useSelector(selectModalWindow);
-
-  console.log(table);
+  const stateTaskForm = useSelector(selectAddTaskForm);
 
   function createTask() {
     dispatch(switchModal(true));
+    dispatch(openAddTaskForm(true));
   }
 
   return (
@@ -35,7 +39,7 @@ const Tasks = () => {
       <button className={css.addTaskBtn} type="button" onClick={createTask}>
         Add task
       </button>
-      {formAddTask && <TaskForm />}
+      {formAddTask && stateTaskForm && <TaskForm />}
 
       <Outlet />
     </div>

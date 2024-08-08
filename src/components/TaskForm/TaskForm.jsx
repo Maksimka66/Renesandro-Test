@@ -1,5 +1,6 @@
 import { useId } from "react";
 import { useDispatch } from "react-redux";
+import { nanoid } from "nanoid";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { createTaskSchema } from "../../Schemas/schemas";
 import ModalWindow from "../ModalWindow/ModalWindow";
@@ -10,7 +11,7 @@ const TaskForm = () => {
   const dispatch = useDispatch();
 
   const initialValues = {
-    template_id: useId(),
+    template_id: nanoid(),
     task_name: "",
     dimension: "1x1",
     image_layers: "",
@@ -114,7 +115,9 @@ const TaskForm = () => {
               <ErrorMessage name="gen_type" as="span" />
             </div>
 
-            <button type="submit">Create new task</button>
+            <button className={css.createTaskBtn} type="submit">
+              Create new task
+            </button>
           </Form>
         </Formik>
       </div>

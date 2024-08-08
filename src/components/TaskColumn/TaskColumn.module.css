@@ -49,13 +49,11 @@
 .itemDimension {
   composes: itemContent;
   background-color: #deb7e9;
-  width: 48px;
 }
 
 .itemTemplate {
   composes: itemContent;
   background-color: #d6486b;
-  width: 48px;
 }
 
 .itemGenType {
@@ -73,6 +71,12 @@
   justify-content: center;
 }
 
+.imagesFormContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
 .resultLink {
   composes: itemContent;
   background-color: #b3f588;
@@ -81,4 +85,24 @@
 .deleteTaskBtn {
   composes: generateImgBtn;
   background-color: #e71538;
+}
+
+.btnContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.closeModalBtn {
+  background-color: #d61434;
+  padding: 0;
+  border-radius: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.closeIcon {
+  stroke: white;
 }

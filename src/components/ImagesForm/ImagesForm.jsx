@@ -1,7 +1,12 @@
 import { useId } from "react";
 import { Formik, Form, ErrorMessage, Field } from "formik";
+import { useDispatch } from "react-redux";
+import { switchModal } from "../../redux/slice";
+import css from "./ImagesForm.module.css";
 
 const ImagesForm = ({ submitForm, values, schema }) => {
+  const dispatch = useDispatch();
+
   const taskNameId = useId();
   const dimensionId = useId();
   const imagesId = useId();
@@ -9,13 +14,17 @@ const ImagesForm = ({ submitForm, values, schema }) => {
   const amountId = useId();
   const genTypeId = useId();
 
+  function closeModal() {
+    dispatch(switchModal(false));
+  }
+
   return (
     <Formik
       onSubmit={submitForm}
       initialValues={values}
       validationSchema={schema}
     >
-      <Form>
+      <Form className={css.taskForm}>
         <div>
           <label htmlFor={taskNameId}>Task name</label>
           <Field type="text" name="task_name" id={taskNameId} />

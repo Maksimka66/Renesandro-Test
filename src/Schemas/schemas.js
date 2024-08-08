@@ -14,7 +14,6 @@ export const createTaskSchema = Yup.object().shape({
 
 export const generateImagesSchema = Yup.object().shape({
   images: Yup.array()
-    .of(Yup.string())
     .min(2, "Too short!")
     .required("Please insert name of your task!"),
   dimension: Yup.string()
