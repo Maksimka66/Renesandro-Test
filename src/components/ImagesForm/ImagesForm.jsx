@@ -5,8 +5,8 @@ import { switchModal } from "../../redux/slice";
 import { generateImages } from "../../redux/operations";
 import { generateImagesSchema } from "../../Schemas/schemas";
 import ModalWindow from "../ModalWindow/ModalWindow";
-import css from "./ImagesForm.module.css";
 import { selectCard } from "../../redux/selectors";
+import css from "./ImagesForm.module.css";
 
 const ImagesForm = () => {
   const dispatch = useDispatch();
@@ -36,8 +36,8 @@ const ImagesForm = () => {
   };
 
   function submitForm(values, actions) {
-    dispatch(generateImages(values));
     dispatch(switchModal(false));
+    dispatch(generateImages(values));
     actions.resetForm();
   }
 
