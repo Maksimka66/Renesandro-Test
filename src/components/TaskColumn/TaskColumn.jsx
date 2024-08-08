@@ -31,10 +31,10 @@ const TaskColumn = ({
   const stateGenerateImagesForm = useSelector(selectGenerateImagesForm);
 
   const initialValues = {
-    images: [image_layers],
+    images: image_layers,
     dimension,
     style: task_name,
-    manual_prompts: [text_layers],
+    manual_prompts: text_layers,
     gen_per_ref: gen_type,
     flow: amount,
   };
