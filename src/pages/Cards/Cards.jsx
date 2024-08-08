@@ -38,17 +38,14 @@ const Cards = () => {
 
   console.log(image_layers);
 
-  imageArr.push(image_layers);
-  textArr.push(text_layers);
-
   const initialValues = {
     template_id,
     task_name,
     amount,
     dimension,
     gen_type,
-    imageArr,
-    textArr,
+    image_layers: ["image1", "image2"],
+    text_layers: ["text1", "text2"],
   };
 
   function closeModal() {
