@@ -1,7 +1,7 @@
 import * as Yup from "yup";
 
 export const createTaskSchema = Yup.object().shape({
-  task_name: Yup.string().trim().required(),
+  task_name: Yup.string().trim().required("Please enter name of your task!"),
   dimension: Yup.string()
     .trim()
     .required("Please choose dimension of your images!"),
