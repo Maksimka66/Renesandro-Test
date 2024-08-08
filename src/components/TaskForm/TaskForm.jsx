@@ -65,7 +65,11 @@ const TaskForm = () => {
                 name="task_name"
                 id={taskNameId}
               />
-              <ErrorMessage name="task_name" as="span" />
+              <ErrorMessage
+                className={css.errorMsg}
+                name="task_name"
+                as="span"
+              />
             </div>
 
             <div className={css.taskFormItem}>
@@ -80,25 +84,37 @@ const TaskForm = () => {
                 <option value="9x16">9x16</option>
                 <option value="16x9">16x9</option>
               </Field>
-              <ErrorMessage name="dimension" as="span" />
+              <ErrorMessage
+                className={css.errorMsg}
+                name="dimension"
+                as="span"
+              />
             </div>
 
             <div className={css.taskFormItem}>
               <label htmlFor={imagesId}>Images</label>
               <Field className={css.field} name="image_layers" id={imagesId} />
-              <ErrorMessage name="image_layers" as="span" />
+              <ErrorMessage
+                className={css.errorMsg}
+                name="image_layers"
+                as="span"
+              />
             </div>
 
             <div className={css.taskFormItem}>
               <label htmlFor={textId}>Text</label>
               <Field className={css.field} name="text_layers" id={textId} />
-              <ErrorMessage name="text_layers" as="span" />
+              <ErrorMessage
+                className={css.errorMsg}
+                name="text_layers"
+                as="span"
+              />
             </div>
 
             <div className={css.taskFormItem}>
               <label htmlFor={amountId}>Amount</label>
               <Field className={css.field} name="amount" id={amountId} />
-              <ErrorMessage name="amount" as="span" />
+              <ErrorMessage className={css.errorMsg} name="amount" as="span" />
             </div>
 
             <div className={css.taskFormItem}>
@@ -112,7 +128,11 @@ const TaskForm = () => {
                 <option value="cyclic_generation">Cyclic</option>
                 <option value="random_generation">Random</option>
               </Field>
-              <ErrorMessage name="gen_type" as="span" />
+              <ErrorMessage
+                className={css.errorMsg}
+                name="gen_type"
+                as="span"
+              />
             </div>
 
             <button className={css.createTaskBtn} type="submit">

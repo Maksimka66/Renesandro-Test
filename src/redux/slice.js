@@ -17,6 +17,7 @@ const renesandroSlice = createSlice({
     tasks: [],
     images: [],
     card: {},
+    requestCard: "",
     addTaskForm: false,
     generateImagesForm: false,
     sendTaskForm: false,
@@ -38,7 +39,7 @@ const renesandroSlice = createSlice({
       .addCase(generateFormats.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.card = action.payload;
+        state.requestCard = action.payload;
       })
       .addCase(generateFormats.rejected, handleRejected),
 

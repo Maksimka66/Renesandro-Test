@@ -1,15 +1,19 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field, ErrorMessage, FieldArray } from "formik";
 import { useId } from "react";
 import ModalWindow from "../../components/ModalWindow/ModalWindow";
-import { switchModal } from "../../redux/slice";
+import { openSendTaskForm, switchModal } from "../../redux/slice";
 import {
   selectCard,
   selectModalWindow,
   selectSendTaskForm,
 } from "../../redux/selectors";
 import { createTaskSchema } from "../../Schemas/schemas";
+import { generateFormats } from "../../redux/operations";
 import css from "./Cards.module.css";
+
+const imageArr = [];
+const textArr = [];
 
 const Cards = () => {
   const dispatch = useDispatch();
@@ -32,27 +36,35 @@ const Cards = () => {
   const amountId = useId();
   const genTypeId = useId();
 
+  console.log(image_layers);
+
+  imageArr.push(image_layers);
+  textArr.push(text_layers);
+
   const initialValues = {
+    template_id,
     task_name,
     amount,
     dimension,
     gen_type,
-    image_layers,
-    template_id,
-    text_layers,
+    imageArr,
+    textArr,
   };
 
   function closeModal() {
     dispatch(switchModal(false));
   }
 
-  function submitFullTask() {}
+  function submitFullTask() {
+    dispatch(generateFormats(initialValues));
+    dispatch(openSendTaskForm(false));
+  }
 
   return (
     modalWindowCard &&
     sendForm && (
       <ModalWindow>
-        <div>
+        <div className={css.sendFormContainer}>
           <div className={css.btnContainer}>
             <button
               className={css.closeModalBtn}
@@ -69,11 +81,20 @@ const Cards = () => {
             onSubmit={submitFullTask}
             validationSchema={createTaskSchema}
           >
-            <Form>
-              <div>
+            <Form className={css.taskForm}>
+              <div className={css.taskFormItem}>
                 <label htmlFor={taskNameId}>Task name</label>
-                <Field type="text" name="task_name" id={taskNameId} />
-                <ErrorMessage name="task_name" as="span" />
+                <Field
+                  className={css.field}
+                  type="text"
+                  name="task_name"
+                  id={taskNameId}
+                />
+                <ErrorMessage
+                  className={css.errorMsg}
+                  name="task_name"
+                  as="span"
+                />
               </div>
 
               <div className={css.taskFormItem}>
@@ -88,29 +109,48 @@ const Cards = () => {
                   <option value="9x16">9x16</option>
                   <option value="16x9">16x9</option>
                 </Field>
-                <ErrorMessage name="dimension" as="span" />
+                <ErrorMessage
+                  className={css.errorMsg}
+                  name="dimension"
+                  as="span"
+                />
               </div>
 
               <div className={css.taskFormItem}>
                 <label htmlFor={imagesId}>Images</label>
-                <Field
-                  className={css.field}
+                <FieldArray name="image_layers">
+                  <Field
+                    className={css.field}
+                    name="image_layers"
+                    id={imagesId}
+                  />
+                </FieldArray>
+
+                <ErrorMessage
+                  className={css.errorMsg}
                   name="image_layers"
-                  id={imagesId}
+                  as="span"
                 />
-                <ErrorMessage name="image_layers" as="span" />
               </div>
 
               <div className={css.taskFormItem}>
                 <label htmlFor={textId}>Text</label>
                 <Field className={css.field} name="text_layers" id={textId} />
-                <ErrorMessage name="text_layers" as="span" />
+                <ErrorMessage
+                  className={css.errorMsg}
+                  name="text_layers"
+                  as="span"
+                />
               </div>
 
               <div className={css.taskFormItem}>
                 <label htmlFor={amountId}>Amount</label>
                 <Field className={css.field} name="amount" id={amountId} />
-                <ErrorMessage name="amount" as="span" />
+                <ErrorMessage
+                  className={css.errorMsg}
+                  name="amount"
+                  as="span"
+                />
               </div>
 
               <div className={css.taskFormItem}>
@@ -124,12 +164,18 @@ const Cards = () => {
                   <option value="cyclic_generation">Cyclic</option>
                   <option value="random_generation">Random</option>
                 </Field>
-                <ErrorMessage name="gen_type" as="span" />
+                <ErrorMessage
+                  className={css.errorMsg}
+                  name="gen_type"
+                  as="span"
+                />
               </div>
 
-              <button className={css.createTaskBtn} type="submit">
-                Generate task
-              </button>
+              <div className={css.generateTaskBtnContainer}>
+                <button className={css.generateTaskBtn} type="submit">
+                  Generate task
+                </button>
+              </div>
             </Form>
           </Formik>
         </div>

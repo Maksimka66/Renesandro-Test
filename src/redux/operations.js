@@ -23,9 +23,9 @@ export const generateImages = createAsyncThunk(
 
 export const generateFormats = createAsyncThunk(
   "images/generate",
-  async (_, thunkAPI) => {
+  async (values, thunkAPI) => {
     try {
-      const res = await axios.post("/generate_formats");
+      const res = await axios.post("/generate_formats", values);
 
       console.log(res);
 

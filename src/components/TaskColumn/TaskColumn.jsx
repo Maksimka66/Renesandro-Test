@@ -1,7 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { generateImages } from "../../redux/operations";
-import { generateImagesSchema } from "../../Schemas/schemas";
 import ModalWindow from "../ModalWindow/ModalWindow";
 import {
   selectGenerateImagesForm,
@@ -33,10 +31,10 @@ const TaskColumn = ({
   const stateGenerateImagesForm = useSelector(selectGenerateImagesForm);
 
   const initialValues = {
-    images: image_layers,
+    images: [image_layers],
     dimension,
     style: task_name,
-    manual_prompts: text_layers,
+    manual_prompts: [text_layers],
     gen_per_ref: gen_type,
     flow: amount,
   };
@@ -54,12 +52,6 @@ const TaskColumn = ({
 
   function closeModal() {
     dispatch(switchModal(false));
-  }
-
-  function submitForm(values, actions) {
-    dispatch(generateImages(values));
-    dispatch(switchModal(false));
-    actions.resetForm();
   }
 
   function deleteTask() {
@@ -110,7 +102,7 @@ const TaskColumn = ({
             type="button"
             onClick={openModal}
           >
-            Generate
+            Generate images
           </button>
         </div>
         <div className={css.item}>
@@ -148,11 +140,7 @@ const TaskColumn = ({
                 </svg>
               </button>
             </div>
-            <ImagesForm
-              submitForm={submitForm}
-              values={initialValues}
-              schema={generateImagesSchema}
-            />
+            <ImagesForm values={initialValues} />
           </div>
         </ModalWindow>
       )}
