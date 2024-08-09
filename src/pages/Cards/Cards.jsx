@@ -1,6 +1,6 @@
+import { useId } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Formik, Form, Field, ErrorMessage, FieldArray } from "formik";
-import { useId } from "react";
 import ModalWindow from "../../components/ModalWindow/ModalWindow";
 import { openSendTaskForm, switchModal } from "../../redux/slice";
 import {
@@ -8,7 +8,7 @@ import {
   selectModalWindow,
   selectSendTaskForm,
 } from "../../redux/selectors";
-import { createTaskSchema } from "../../Schemas/schemas";
+import { generateTaskSchema } from "../../Schemas/schemas";
 import { generateFormats } from "../../redux/operations";
 import css from "./Cards.module.css";
 
@@ -64,7 +64,7 @@ const Cards = () => {
           <Formik
             initialValues={initialValues}
             onSubmit={submitFullTask}
-            validationSchema={createTaskSchema}
+            validationSchema={generateTaskSchema}
           >
             <Form className={css.taskForm}>
               <div className={css.taskFormItem}>

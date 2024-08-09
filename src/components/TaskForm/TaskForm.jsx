@@ -4,7 +4,7 @@ import { nanoid } from "nanoid";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { createTaskSchema } from "../../Schemas/schemas";
 import ModalWindow from "../ModalWindow/ModalWindow";
-import { addTaskValues, switchModal } from "../../redux/slice";
+import { addTaskValues, openAddTaskForm, switchModal } from "../../redux/slice";
 import css from "./TaskForm.module.css";
 
 const TaskForm = () => {
@@ -21,15 +21,10 @@ const TaskForm = () => {
   };
 
   const taskNameId = useId();
-  const dimensionId = useId();
-  const imagesId = useId();
-  const textId = useId();
-  const amountId = useId();
-  const genTypeId = useId();
 
   function handleSubmit(values, actions) {
     dispatch(addTaskValues(values));
-    closeModal();
+    dispatch(openAddTaskForm(false));
     actions.resetForm();
   }
 
@@ -68,69 +63,6 @@ const TaskForm = () => {
               <ErrorMessage
                 className={css.errorMsg}
                 name="task_name"
-                as="span"
-              />
-            </div>
-
-            <div className={css.taskFormItem}>
-              <label htmlFor={dimensionId}>Dimension</label>
-              <Field
-                className={css.field}
-                as="select"
-                name="dimension"
-                id={dimensionId}
-              >
-                <option value="1x1">1x1</option>
-                <option value="9x16">9x16</option>
-                <option value="16x9">16x9</option>
-              </Field>
-              <ErrorMessage
-                className={css.errorMsg}
-                name="dimension"
-                as="span"
-              />
-            </div>
-
-            <div className={css.taskFormItem}>
-              <label htmlFor={imagesId}>Images</label>
-              <Field className={css.field} name="image_layers" id={imagesId} />
-              <ErrorMessage
-                className={css.errorMsg}
-                name="image_layers"
-                as="span"
-              />
-            </div>
-
-            <div className={css.taskFormItem}>
-              <label htmlFor={textId}>Text</label>
-              <Field className={css.field} name="text_layers" id={textId} />
-              <ErrorMessage
-                className={css.errorMsg}
-                name="text_layers"
-                as="span"
-              />
-            </div>
-
-            <div className={css.taskFormItem}>
-              <label htmlFor={amountId}>Amount</label>
-              <Field className={css.field} name="amount" id={amountId} />
-              <ErrorMessage className={css.errorMsg} name="amount" as="span" />
-            </div>
-
-            <div className={css.taskFormItem}>
-              <label htmlFor={genTypeId}>Gen type</label>
-              <Field
-                className={css.field}
-                as="select"
-                name="gen_type"
-                id={genTypeId}
-              >
-                <option value="cyclic_generation">Cyclic</option>
-                <option value="random_generation">Random</option>
-              </Field>
-              <ErrorMessage
-                className={css.errorMsg}
-                name="gen_type"
                 as="span"
               />
             </div>

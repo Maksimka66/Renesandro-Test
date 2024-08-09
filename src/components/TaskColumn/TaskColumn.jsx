@@ -46,8 +46,13 @@ const TaskColumn = ({
 
   function getTaskId() {
     dispatch(switchModal(true));
-    dispatch(getTask(template_id));
     dispatch(openSendTaskForm(true));
+    dispatch(getTask(template_id));
+  }
+
+  function sendRequest() {
+    dispatch(switchModal(true));
+    dispatch(openSendTaskForm(false));
   }
 
   function deleteTask() {

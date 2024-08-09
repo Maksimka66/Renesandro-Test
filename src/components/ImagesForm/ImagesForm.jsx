@@ -11,11 +11,11 @@ import css from "./ImagesForm.module.css";
 const ImagesForm = () => {
   const dispatch = useDispatch();
 
-  const [flow, setFlow] = useState("");
-  const [gen_per_ref, setGen_per_ref] = useState("");
-  const [style, setStyle] = useState("");
-  const [manual_prompts, setManual_prompts] = useState("");
-  const [images, setImages] = useState([]);
+  // const [flow, setFlow] = useState("");
+  // const [gen_per_ref, setGen_per_ref] = useState("");
+  // const [style, setStyle] = useState("");
+  // const [manual_prompts, setManual_prompts] = useState("");
+  // const [images, setImages] = useState([]);
 
   const taskNameId = useId();
   const dimensionId = useId();
@@ -24,16 +24,18 @@ const ImagesForm = () => {
   const amountId = useId();
   const genTypeId = useId();
 
-  const { dimension } = useSelector(selectCard);
+  const card = useSelector(selectCard);
 
-  const initialValues = {
-    flow,
-    gen_per_ref,
-    dimension,
-    style,
-    images,
-    manual_prompts,
-  };
+  console.log(card);
+
+  // const initialValues = {
+  //   flow,
+  //   gen_per_ref,
+  //   dimension,
+  //   style,
+  //   images,
+  //   manual_prompts,
+  // };
 
   function submitForm(values, actions) {
     dispatch(switchModal(false));
@@ -62,22 +64,10 @@ const ImagesForm = () => {
 
         <Formik
           onSubmit={submitForm}
-          initialValues={initialValues}
+          // initialValues={initialValues}
           validationSchema={generateImagesSchema}
         >
           <Form className={css.taskForm}>
-            <div className={css.imagesFormItem}>
-              <label htmlFor={taskNameId}>Task name</label>
-              <Field
-                className={css.field}
-                type="text"
-                name="task_name"
-                id={taskNameId}
-                onChange={(e) => setStyle(e.target.value)}
-              />
-              <ErrorMessage name="task_name" as="span" />
-            </div>
-
             <div className={css.imagesFormItem}>
               <label htmlFor={dimensionId}>Dimension</label>
               <Field
