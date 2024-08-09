@@ -3,7 +3,6 @@ import { Formik, Form, ErrorMessage, Field } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { switchModal } from "../../redux/slice";
 import { generateImages } from "../../redux/operations";
-import { generateImagesSchema } from "../../Schemas/schemas";
 import ModalWindow from "../ModalWindow/ModalWindow";
 import { selectCard } from "../../redux/selectors";
 import css from "./ImagesForm.module.css";
@@ -11,13 +10,10 @@ import css from "./ImagesForm.module.css";
 const ImagesForm = () => {
   const dispatch = useDispatch();
 
-  // const [flow, setFlow] = useState("");
-  // const [gen_per_ref, setGen_per_ref] = useState("");
-  // const [style, setStyle] = useState("");
-  // const [manual_prompts, setManual_prompts] = useState("");
-  // const [images, setImages] = useState([]);
+  const [images, setImages] = useState([]);
+  const [text, setText] = useState("");
+  const [amount, setAmount] = useState(0);
 
-  const taskNameId = useId();
   const dimensionId = useId();
   const imagesId = useId();
   const textId = useId();
@@ -26,18 +22,23 @@ const ImagesForm = () => {
 
   const card = useSelector(selectCard);
 
-  console.log(card);
-
-  // const initialValues = {
-  //   flow,
-  //   gen_per_ref,
-  //   dimension,
-  //   style,
-  //   images,
-  //   manual_prompts,
-  // };
+  const initialValues = {
+    id: card.template_id,
+    flow: "",
+    gen_per_ref: 0,
+    dimension: "",
+    style: "",
+    manual_prompts: "",
+    images: [],
+  };
 
   function submitForm(values, actions) {
+    values.images = images;
+    values.flow = card.task_name;
+    values.manual_prompts = text;
+    values.gen_per_ref = amount;
+    values.dimension = card.dimension;
+
     dispatch(switchModal(false));
     dispatch(generateImages(values));
     actions.resetForm();
@@ -62,11 +63,7 @@ const ImagesForm = () => {
           </button>
         </div>
 
-        <Formik
-          onSubmit={submitForm}
-          // initialValues={initialValues}
-          validationSchema={generateImagesSchema}
-        >
+        <Formik onSubmit={submitForm} initialValues={initialValues}>
           <Form className={css.taskForm}>
             <div className={css.imagesFormItem}>
               <label htmlFor={dimensionId}>Dimension</label>
@@ -75,6 +72,7 @@ const ImagesForm = () => {
                 as="select"
                 name="dimension"
                 id={dimensionId}
+                required
               >
                 <option className={css.optionValue} value="1x1">
                   1x1
@@ -95,7 +93,8 @@ const ImagesForm = () => {
                 className={css.field}
                 name="image_layers"
                 id={imagesId}
-                onChange={(e) => setImages(images.push(e.target.value))}
+                required
+                onChange={(e) => setImages([e.target.value])}
               />
               <ErrorMessage name="image_layers" as="span" />
             </div>
@@ -106,7 +105,8 @@ const ImagesForm = () => {
                 className={css.field}
                 name="text_layers"
                 id={textId}
-                onChange={(e) => setManual_prompts(e.target.value)}
+                required
+                onChange={(e) => setText(e.target.value)}
               />
               <ErrorMessage name="text_layers" as="span" />
             </div>
@@ -117,7 +117,8 @@ const ImagesForm = () => {
                 className={css.field}
                 name="amount"
                 id={amountId}
-                onChange={(e) => setFlow(e.target.value)}
+                required
+                onChange={(e) => setAmount(e.target.value)}
               />
               <ErrorMessage name="amount" as="span" />
             </div>
@@ -128,8 +129,8 @@ const ImagesForm = () => {
                 className={css.field}
                 as="select"
                 name="gen_type"
+                required
                 id={genTypeId}
-                onChange={(e) => setGen_per_ref(e.target.value)}
               >
                 <option className={css.optionValue} value="cyclic_generation">
                   Cyclic

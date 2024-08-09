@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import {
   selectGenerateImagesForm,
+  selectImages,
   selectModalWindow,
 } from "../../redux/selectors";
 import {
@@ -13,6 +14,7 @@ import {
 } from "../../redux/slice";
 import ImagesForm from "../ImagesForm/ImagesForm";
 import css from "./TaskColumn.module.css";
+import { nanoid } from "nanoid";
 
 const TaskColumn = ({
   item: {
@@ -26,8 +28,10 @@ const TaskColumn = ({
   },
 }) => {
   const dispatch = useDispatch();
+
   const setModal = useSelector(selectModalWindow);
   const stateGenerateImagesForm = useSelector(selectGenerateImagesForm);
+  const images = useSelector(selectImages);
 
   const initialValues = {
     images: image_layers,
@@ -50,14 +54,11 @@ const TaskColumn = ({
     dispatch(getTask(template_id));
   }
 
-  function sendRequest() {
-    dispatch(switchModal(true));
-    dispatch(openSendTaskForm(false));
-  }
-
   function deleteTask() {
     dispatch(removeTask(template_id));
   }
+
+  console.log(images);
 
   return (
     <div className={css.taskColumn}>
@@ -82,7 +83,13 @@ const TaskColumn = ({
         </div>
         <div className={css.item}>
           <h2 className={css.itemHeader}>Images</h2>
-          <p className={css.itemContent}>{image_layers}</p>
+          {images.images !== undefined && (
+            <ul className={css.itemContent}>
+              {images.images.map((item) => (
+                <li key={nanoid()}>{item}</li>
+              ))}
+            </ul>
+          )}
         </div>
         <div className={css.item}>
           <h2 className={css.itemHeader}>Text</h2>

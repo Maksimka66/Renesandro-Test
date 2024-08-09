@@ -15,7 +15,7 @@ const renesandroSlice = createSlice({
   name: "renesandro",
   initialState: {
     tasks: [],
-    images: [],
+    images: {},
     card: {},
     requestCard: "",
     addTaskForm: false,
@@ -32,7 +32,9 @@ const renesandroSlice = createSlice({
       .addCase(generateImages.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.images.push(action.payload);
+        return state.tasks.find(
+          (task) => action.payload.template_id === task.template_id
+        );
       })
       .addCase(generateImages.rejected, handleRejected)
       .addCase(generateFormats.pending, handlePending)

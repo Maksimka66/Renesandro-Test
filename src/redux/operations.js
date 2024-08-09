@@ -12,7 +12,9 @@ export const generateImages = createAsyncThunk(
     try {
       const res = await axios.post("/generate_images", values);
 
-      return res.data;
+      console.log(res.data);
+
+      return { result: res.data, values };
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -24,8 +26,6 @@ export const generateFormats = createAsyncThunk(
   async (values, thunkAPI) => {
     try {
       const res = await axios.post("/generate_formats", values);
-
-      console.log(res);
 
       return res.data;
     } catch (error) {
